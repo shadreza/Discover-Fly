@@ -32,39 +32,45 @@
             <h3>Booking Flights</h3>
             <div class="input-group">
                 <label for="">Flying From</label>
-                <input class="inp-style" type="text" name="" placeholder="Dhake, Bangladesh">
+                <input class="inp-style" type="text" name="" placeholder="Dhaka, Bangladesh" id="fromText">
             </div>
             <div class="input-group">
                 <label for="">Flying To</label>
-                <input class="inp-style" type="text" name="" placeholder="New York, United States">
+                <input class="inp-style" type="text" name="" placeholder="New York, United States" id="toText">
             </div>
             <div class="inputs">
                 <div class="input-group">
                     <label" for="">Departure</label>
-                    <input class="inp-style" type="date" name="">
+                    <input class="inp-style" type="date" name="" id="departureDate">
                 </div>
                 <div class="input-group">
                     <label for="">Return</label>
-                    <input class="inp-style" type="date" name="">
+                    <input class="inp-style" type="date" name="" id="returnDate">
                 </div>
             </div>
             <div class="input-group f-class">
                 <div>
-                    <label for="">First Class ($150)</label>
-                    <input class="inp-style inp-width" type="number" name="" value="0">
+                    <label for="">First Class ($<span id="firstClassFarePerSeat">150</span>)</label>
+                    <input class="inp-style inp-width" type="number" name="" placeholder="0" id="numberOfFirstClassSeats">
                 </div>
                 <div class="plus-minus-btn">
-                    <p>+ -</p>
+                    <button id="plusButtonFirstClass">+</button>  <button id="minusButtonFirstClass">-</button>
+                </div>
+                <div class="IndividualBill">
+                    <label for="">$ <strong id="firstClassBill">0</strong> </label>
                 </div>
             </div>
             
             <div class="input-group f-class">
                 <div>
-                    <label for="">Economy ($100)</label>
-                    <input class="inp-style inp-width" type="number" name="" value="0">
+                    <label for="">Economy ($<span id="economyClassFarePerSeat">100</span>)</label>
+                    <input class="inp-style inp-width" type="number" name="" placeholder="0" id="numberOfEconomyClassSeats">
                 </div>
                 <div class="plus-minus-btn">
-                    <p> <span>+</span> <span>-</span> </p>
+                    <button id="plusButtonEconomyClass">+</button>  <button id="minusButtonEconomyClass">-</button>
+                </div>
+                <div class="IndividualBill">
+                    <label for="">$ <strong id="economyClassBill">0</strong> </label>
                 </div>
             </div>
             <div class="calculations">
@@ -73,7 +79,7 @@
                         <p>Subtotal</p>
                     </div>
                     <div class="right">
-                        <p>$500</p>
+                        <p>$ <span id="subtotalPrice">0</span></p>
                     </div>
                 </div>
 
@@ -82,7 +88,7 @@
                         <p>Charge 10% VAT</p>
                     </div>
                     <div class="right">
-                        <p>$50</p>
+                        <p>$ <span id="vatPrice">0</span></p>
                     </div>
                 </div>
                 <hr>
@@ -91,11 +97,11 @@
                         <h4>Total</h4>
                     </div>
                     <div class="right">
-                        <p>$550</p>
+                        <p>$ <span id="totalPrice">0</span> </p>
                     </div>
                 </div>
             </div>
-            <button class="btn-style">Book Now</button>
+            <button class="btn-style" type="submit" id="bookNowButton">Book Now</button>
         </div>
 
         <div class="booking-content">

@@ -63,14 +63,17 @@ nav ul li a:hover, a.active{
     align-items: center;
 }
 .inp-width{
-    min-width: 300px;
+    min-width: 150px;
 }
-.plus-minus-btn{
+.plus-minus-btn button{
     color: #3352F2;
-    font-size: 30px;
-    padding: 2px;
-    margin-top: 10px;
-    word-spacing: 20px;
+    font-size: 25px;
+    padding: 4px;
+    margin-top: 15px;
+    word-spacing: 30px;
+    border: none;
+    background: white;
+    width: 20px;
 }
 .booking-form  .calculations{
     margin: 10px 0;
@@ -119,4 +122,14 @@ nav ul li a:hover, a.active{
 .amount{
     display: flex;
     justify-content: space-between;
+}
+
+.IndividualBill{
+    margin-top: 16px;
+    justify-content: right;
+    /* width: 100px; */
+}
+
+.calculations .right{
+    justify-content: right;
 }
