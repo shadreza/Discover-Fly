@@ -219,7 +219,7 @@ document.getElementById('bookNowButton').addEventListener('click',function(){
             document.getElementById('doubleFareNotification').style.display='block';
             changingSeatCountsAndFare('numberOfFirstClassSeats','firstClassBill',firstClassFarePerSeat);
             changingSeatCountsAndFare('numberOfEconomyClassSeats','economyClassBill',economyClassFarePerSeat);
-            alert('Departure Location: '+ fromTextNode.value + '\nLanding Location: ' + toTextNode.value + '\n' + 'Departure Date: ' + departureDateNode.value + '\nReturn Date: ' + returnDateNode.value + '\n\nFirst Class Ticket: ' + firstClassSeatsNumber + '\nFirst Class Fare: ' + firstClassBill + '\n\nEconomy Class Ticket: ' + economyClassSeatsNumber + '\nEconomy Class Fare: ' + economyClassBill + '\n\nTotal Bill : ' + totalBill);
+            alert('Departure Location: '+ fromTextNode.value + '\nLanding Location: ' + toTextNode.value + '\n' + 'Departure Date: ' + departureDateNode.value + '\nReturn Date: ' + returnDateNode.value + '\n\nFirst Class Ticket: ' + firstClassSeatsNumber + '\nFirst Class Fare: ' + firstClassBill + '$\n\nEconomy Class Ticket: ' + economyClassSeatsNumber + '\nEconomy Class Fare: ' + economyClassBill + '$\n\nTotal Bill : ' + totalBill + '$\n\nThank You!');
             location.reload();
         }
     }
@@ -228,7 +228,7 @@ document.getElementById('bookNowButton').addEventListener('click',function(){
         document.getElementById('doubleFareNotification').style.display='none';
         changingSeatCountsAndFare('numberOfFirstClassSeats','firstClassBill',firstClassFarePerSeat);
         changingSeatCountsAndFare('numberOfEconomyClassSeats','economyClassBill',economyClassFarePerSeat);
-        alert('Departure Location: '+ fromTextNode.value + '\nLanding Location: ' + toTextNode.value + '\n' + 'Departure Date: ' + departureDateNode.value + '\nReturn Date: ' + returnDateNode.value + '\n\nFirst Class Ticket: ' + firstClassSeatsNumber + '\nFirst Class Fare: ' + firstClassBill + '\n\nEconomy Class Ticket: ' + economyClassSeatsNumber + '\nEconomy Class Fare: ' + economyClassBill + '\n\nTotal Bill : ' + totalBill);
+        alert('Departure Location: '+ fromTextNode.value + '\nLanding Location: ' + toTextNode.value + '\n' + 'Departure Date: ' + departureDateNode.value + '\nReturn Date: ' + returnDateNode.value + '\n\nFirst Class Ticket: ' + firstClassSeatsNumber + '\nFirst Class Fare: ' + firstClassBill + '$\n\nEconomy Class Ticket: ' + economyClassSeatsNumber + '\nEconomy Class Fare: ' + economyClassBill + '$\n\nTotal Bill : ' + totalBill + '$\n\nThank You!');
         location.reload();
     }
 })
