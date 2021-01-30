@@ -133,3 +133,9 @@ nav ul li a:hover, a.active{
 .calculations .right{
     justify-content: right;
 }
+
+#doubleFareNotification small{
+    text-align: center;
+    color: tomato;
+    display: none;
+}
