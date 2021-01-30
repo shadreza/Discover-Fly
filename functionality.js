@@ -2,6 +2,11 @@ var doubleFare=0;
 if(doubleFare==0){
     document.getElementById('doubleFareNotification').style.display='none';
 }
+document.getElementById('popupBox').style.display='none';
+function showMessage(message){
+    document.getElementById('popupBoxMessage').innerText=message;
+    document.getElementById('popupBox').style.display='block';
+}
 var firstClassFarePerSeat = parseFloat(document.getElementById('firstClassFarePerSeat').innerText);
 var economyClassFarePerSeat = parseFloat(document.getElementById('economyClassFarePerSeat').innerText);
 function updatingSubTotalAndVatAndTotal(){
@@ -25,14 +30,14 @@ function changingSeatCountsAndFare(numberOfSeatsOfTheClass,billOfTheClass,billPe
     }
     var numberOfClassSeats=parseInt(numberOfClassSeatsString);
     if(numberOfClassSeats<0){
-        alert("Amount Of Seats Can't Be Negative!");
+        showMessage("Amount Of Seats Can't Be Negative!");
         numberOfClassSeatsNode.value="";
         document.getElementById(billOfTheClass).innerText=(0);
         updatingSubTotalAndVatAndTotal();
         return;
     }
     else if(isNaN(numberOfClassSeats)){
-        alert("Invalid Input");
+        showMessage("Invalid Input");
         numberOfClassSeatsNode.value="";
         document.getElementById(billOfTheClass).innerText=(0);
         updatingSubTotalAndVatAndTotal();
@@ -45,7 +50,7 @@ function changingSeatCountsAndFare(numberOfSeatsOfTheClass,billOfTheClass,billPe
         return;
     }
     else if(numberOfClassSeats*10 != parseFloat(numberOfClassSeatsString)*10){
-        alert("Inserted A Floating Number Please Insert Desired Integer Number!");
+        showMessage("Inserted A Floating Number Please Insert Desired Integer Number!");
         numberOfClassSeatsNode.value="";
         document.getElementById(billOfTheClass).innerText=(0);
         updatingSubTotalAndVatAndTotal();
@@ -117,40 +122,44 @@ fromTextNode.addEventListener('change',function(){
     if(fromTextNode.value!=""){
         if(toTextNode.value!=""){
             if(fromTextNode.value==toTextNode.value){
-                alert('The Departure And Landing Location Can not be Same');
+                showMessage('The Departure And Landing Location Can not be Same');
             }
             else if(fromTextNode.value==""){
-                alert('Please Select The Departure Location First');
+                showMessage('Please Select The Departure Location First');
             }
         }
     }
     else{
-        alert('Please Input Departure Location First');
+        showMessage('Please Input Departure Location First');
     }
 })
 toTextNode.addEventListener('change',function(){
     if(toTextNode.value!=""){
         if(fromTextNode.value==""){
-            alert('Please Select The Departure Location First');
+            showMessage('Please Select The Departure Location First');
         }
         else{
             if(fromTextNode.value==toTextNode.value){
-                alert('The Departure And Landing Location Can not be Same');
+                showMessage('The Departure And Landing Location Can not be Same');
             }
         }
     }
     else{
-        alert('Please Select Landing Location');
+        showMessage('Please Select Landing Location');
     }
 })
 departureDateNode.addEventListener('change',function(){
     if(departureDateNode.value==""){
-        alert('Please Pick Your Departure Date');
+        showMessage('Please Pick Your Departure Date');
     }
     else{
         if(todayDate>departureDateNode.value){
-            alert("Departure Date can't be From The Past");
+            showMessage("Departure Date can't be From The Past");
             departureDateNode.value=todayDate;
+        }
+        else if(departureDateNode.value>returnDateNode.value){
+            showMessage("Departure Date can't After Return Date");
+            returnDateNode.value=departureDateNode.value;
         }
     }
 })
@@ -163,10 +172,10 @@ returnDateNode.addEventListener('change',function(){
     }
     else{
         if(departureDateNode.value==""){
-            alert('Please Pick Your Departure Date First');
+            showMessage('Please Pick Your Departure Date First');
         }
         else if(departureDateNode.value>returnDateNode.value){
-            alert('Return Date Must Be After The Departure Date');
+            showMessage('Return Date Must Be After The Departure Date');
             returnDateNode.value=departureDateNode.value;
         }
         doubleFare=1;
@@ -184,43 +193,94 @@ document.getElementById('bookNowButton').addEventListener('click',function(){
     var economyClassSeatsNumber = document.getElementById('numberOfEconomyClassSeats').value;
     var firstClassBill = parseFloat(document.getElementById('firstClassBill').innerText);
     var economyClassBill = parseFloat(document.getElementById('economyClassBill').innerText);
+    var tax = parseFloat(document.getElementById('vatPrice').innerText);
     var totalBill = totalBillNode.innerText;
-    
+    var messageToShow = "";
+    function billMessage(){
+            if(fromTextNode.value!=""){
+                messageToShow += 'Departure Location: '+ fromTextNode.value;
+            }
+            if(toTextNode.value!=""){
+                messageToShow += '\nLanding Location: ' + toTextNode.value;
+            }
+            if(departureDateNode.value!=""){
+                messageToShow += '\nDeparture Date: ' + departureDateNode.value;
+            }
+            if(returnDateNode.value!=""){
+                messageToShow += '\nReturn Date: ' + returnDateNode.value;
+            }
+            if(firstClassSeatsNumber>0){
+                messageToShow += '\n\nFirst Class Ticket: ' + firstClassSeatsNumber + '\nFirst Class Fare: ' + firstClassBill;
+            }
+            if(economyClassSeatsNumber>0){
+                messageToShow += '$\n\nEconomy Class Ticket: ' + economyClassSeatsNumber + '\nEconomy Class Fare: ' + economyClassBill;
+            }
+            if(tax>0){
+                messageToShow += '$\n\nTax: ' + tax;
+            }
+            if(totalBill>0){
+                messageToShow += '$\n\nTotal Bill : ' + totalBill  + '$\n\nThank You!';
+            }
+    }
+    var extraMessage = "\n&\nNo Tickets Are Selected!";
     if(fromTextValue==""){
-        alert('Please Input Flying From Location');
+        if(totalBill==0){
+            showMessage('Please Input Flying From Location' + extraMessage);
+            return;
+        }
+        showMessage('Please Input Flying From Location');
         return;
     }
     else if(toTextValue==""){
-        alert('Please Input Destination Location');
+        if(totalBill==0){
+            showMessage('Please Input Destination Location' + extraMessage);
+            return;
+        }
+        showMessage('Please Input Destination Location');
         return;
     }
     else if(fromTextValue==toTextValue){
-        alert("Departure and Destination Location can't be same");
+        if(totalBill==0){
+            showMessage("Departure and Destination Location can't be same" + extraMessage);
+            return;
+        }
+        showMessage("Departure and Destination Location can't be same");
         return;
     }
     else if(departureDateValue==""){
-        alert('Please Select Departure Date');
+        if(totalBill==0){
+            showMessage('Please Select Departure Date' + extraMessage);
+            return;
+        }
+        showMessage('Please Select Departure Date');
         return;
     }
     else if(todayDate>departureDateValue){
-        alert("Departure Date can't be From The Past");
+        if(totalBill==0){
+            showMessage("Departure Date can't be From The Past" + extraMessage);
+            return;
+        }
+        showMessage("Departure Date can't be From The Past");
         return;
     }
     else if(totalBill==0){
-        alert('No Tickets Are Selected');
+        showMessage('No Tickets Are Selected');
         return;
     }
     else if(returnDateValue!=""){
         if(departureDateValue>returnDateValue){
-            alert("Return Date Can't Be Before The Departure Date");
+            showMessage("Return Date Can't Be Before The Departure Date");
         }
         else{
             doubleFare=1;
             document.getElementById('doubleFareNotification').style.display='block';
             changingSeatCountsAndFare('numberOfFirstClassSeats','firstClassBill',firstClassFarePerSeat);
             changingSeatCountsAndFare('numberOfEconomyClassSeats','economyClassBill',economyClassFarePerSeat);
-            alert('Departure Location: '+ fromTextNode.value + '\nLanding Location: ' + toTextNode.value + '\n' + 'Departure Date: ' + departureDateNode.value + '\nReturn Date: ' + returnDateNode.value + '\n\nFirst Class Ticket: ' + firstClassSeatsNumber + '\nFirst Class Fare: ' + firstClassBill + '$\n\nEconomy Class Ticket: ' + economyClassSeatsNumber + '\nEconomy Class Fare: ' + economyClassBill + '$\n\nTotal Bill : ' + totalBill + '$\n\nThank You!');
-            location.reload();
+            billMessage();
+            showMessage(messageToShow);
+            document.getElementById('closePopupBox').addEventListener('click',function(){
+                location.reload();
+            })
         }
     }
     else{
@@ -228,7 +288,15 @@ document.getElementById('bookNowButton').addEventListener('click',function(){
         document.getElementById('doubleFareNotification').style.display='none';
         changingSeatCountsAndFare('numberOfFirstClassSeats','firstClassBill',firstClassFarePerSeat);
         changingSeatCountsAndFare('numberOfEconomyClassSeats','economyClassBill',economyClassFarePerSeat);
-        alert('Departure Location: '+ fromTextNode.value + '\nLanding Location: ' + toTextNode.value + '\n' + 'Departure Date: ' + departureDateNode.value + '\nReturn Date: ' + returnDateNode.value + '\n\nFirst Class Ticket: ' + firstClassSeatsNumber + '\nFirst Class Fare: ' + firstClassBill + '$\n\nEconomy Class Ticket: ' + economyClassSeatsNumber + '\nEconomy Class Fare: ' + economyClassBill + '$\n\nTotal Bill : ' + totalBill + '$\n\nThank You!');
-        location.reload();
+        billMessage();
+        showMessage(messageToShow);
+        document.getElementById('closePopupBox').addEventListener('click',function(){
+            location.reload();
+        })
     }
 })
+
+document.getElementById('closePopupBox').addEventListener('click',function(){
+    document.getElementById('popupBox').style.display='none';
+})
+
